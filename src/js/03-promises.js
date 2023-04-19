@@ -8,7 +8,7 @@ formEl.addEventListener('submit', e => {
   const amount = parseInt(formData.get('amount'), 10);
 
   for (let i = 0; i < amount; i++) {
-    createPromise(i + 1, firstDelay)
+    createPromise(i + 1, firstDelay + i * step);
       .then(({ position, delay }) => {
         console.log(`✅ Fulfilled promise ${position} in ${delay}ms`);
       })
