@@ -18,20 +18,25 @@ const options = {
       startBtnEl.addEventListener('click', () => {
         const update = setInterval(() => {
           const date = selectedDates[0].getTime();
+          const stringDate = date.toString();
           console.log(`Wybrana data ${date}`);
           const actualDate = new Date().getTime();
+          const strActualDate = actualDate.toString();
           console.log(`Aktualna data ${actualDate}`);
-          const timeLeft = date - actualDate;
+          const timeLeft = stringDate - strActualDate;
           console.log(`różnica ${timeLeft}`);
           const counter = convertMs(timeLeft);
           console.log(` count ${counter.days}`);
-          document.querySelector('.value[data-days]').innerHTML = counter.days;
-          document.querySelector('.value[data-hours]').innerHTML =
-            counter.hours;
+          document.querySelector('.value[data-days]').innerHTML = leadeingZero(
+            counter.days
+          );
+          document.querySelector('.value[data-hours]').innerHTML = leadeingZero(
+            counter.hours
+          );
           document.querySelector('.value[data-minutes]').innerHTML =
-            counter.minutes;
+            leadeingZero(counter.minutes);
           document.querySelector('.value[data-seconds]').innerHTML =
-            counter.seconds;
+            leadeingZero(counter.seconds);
         }, 1000);
       });
     }
@@ -58,3 +63,6 @@ function convertMs(ms) {
 
   return { days, hours, minutes, seconds };
 }
+const leadeingZero = function (counter) {
+  return counter < '10' ? '0' + counter : counter; // if less than 10, add a zero. else just return the number.
+};
